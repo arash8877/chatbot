@@ -8,9 +8,13 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Basic route
+// routes
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello, World!');
+});
+
+app.get('/api/hello', (req: Request, res: Response) => {
+  res.json({ message: 'Hello from the API!' });
 });
 
 // Start the server
