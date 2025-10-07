@@ -22,7 +22,7 @@ export const chatController = {
       if (!process.env.OPENAI_API_KEY) {
          // 👇 mock AI reply for local dev
          return res.json({
-            message: `🤖 [Mocked AI]: You said "${prompt}". Imagine this is a deep and thoughtful AI response.`,
+            message: "🤖 Imagine this is a deep and thoughtful AI response.",
          });
       }
 
