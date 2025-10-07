@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Button } from './button';
 import axios from 'axios';
 import { FaArrowUp } from 'react-icons/fa';
+import ReactMarkdown from 'react-markdown';
 
 type FormData = {
    prompt: string;
@@ -42,7 +43,7 @@ const Chatbot = () => {
 
    return (
       <div>
-         <div className='flex flex-col gap-3 mb-10'>
+         <div className="flex flex-col gap-3 mb-10">
             {messages.map((message, index) => (
                <p
                   key={index}
@@ -52,7 +53,7 @@ const Chatbot = () => {
                         : 'bg-gray-200 text-black self-start rounded-r-2xl rounded-tl-2xl'
                   }`}
                >
-                  {message.content}
+                  <ReactMarkdown>{message.content}</ReactMarkdown>
                </p>
             ))}
          </div>
