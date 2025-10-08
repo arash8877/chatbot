@@ -21,6 +21,7 @@ type Message = {
 const Chatbot = () => {
    const [messages, setMessages] = useState<Message[]>([]);
    const [isBotTyping, setIsBotTyping] = useState(false);
+   const [error, setError] = useState('');
    const conversationId = useRef(crypto.randomUUID());
    const lastMessageRef = useRef<HTMLDivElement | null>(null);
    const { register, handleSubmit, reset, formState } = useForm<FormData>();
@@ -30,16 +31,27 @@ const Chatbot = () => {
    }, [messages]);
 
    const onSubmit = async ({ prompt }: FormData) => {
-      setMessages((prev) => [...prev, { content: prompt, role: 'user' }]);
-      setIsBotTyping(true);
-      reset({prompt: ''});
+      try {
+         setMessages((prev) => [...prev, { content: prompt, role: 'user' }]);
+         setIsBotTyping(true);
+         setError('');
 
-      const { data } = await axios.post<ChatResponse>('/api/chat', {
-         prompt: prompt,
-         conversationId: conversationId.current,
-      });
-      setMessages((prev) => [...prev, { content: data.message, role: 'bot' }]);
-      setIsBotTyping(false);
+         reset({ prompt: '' });
+
+         const { data } = await axios.post<ChatResponse>('/api/chat', {
+            prompt: prompt,
+            conversationId: conversationId.current,
+         });
+         setMessages((prev) => [
+            ...prev,
+            { content: data.message, role: 'bot' },
+         ]);
+      } catch (error) {
+         console.error(error);
+         setError('Something went wrong. Please try again!');
+      } finally {
+         setIsBotTyping(false);
+      }
    };
 
    const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -64,7 +76,7 @@ const Chatbot = () => {
                <div
                   key={index}
                   onCopy={onCopyMessage}
-                  ref={index === messages.length-1 ? lastMessageRef : null}
+                  ref={index === messages.length - 1 ? lastMessageRef : null}
                   className={`px-3 py-1 ${
                      message.role === 'user'
                         ? 'bg-blue-600 text-white self-end rounded-l-2xl rounded-tr-2xl'
@@ -81,6 +93,7 @@ const Chatbot = () => {
                   <div className="w-2 h-2 rounded-full bg-gray-800 animate-pulse [animation-delay:0.6s]"></div>
                </div>
             )}
+            {error && <p className="text-red-500">{error}</p>}
          </div>
          <form
             onSubmit={handleSubmit(onSubmit)}
