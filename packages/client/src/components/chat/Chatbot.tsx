@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button } from './button';
+import { Button } from '../ui/button';
 import axios from 'axios';
 import { FaArrowUp } from 'react-icons/fa';
 import ReactMarkdown from 'react-markdown';
+import TypingIndicator from './TypingIndicator';
 
 type FormData = {
    prompt: string;
@@ -37,6 +38,8 @@ const Chatbot = () => {
          setError('');
 
          reset({ prompt: '' });
+
+         // await new Promise((resolve) => setTimeout(resolve, 5000)); 
 
          const { data } = await axios.post<ChatResponse>('/api/chat', {
             prompt: prompt,
@@ -86,13 +89,7 @@ const Chatbot = () => {
                   <ReactMarkdown>{message.content}</ReactMarkdown>
                </div>
             ))}
-            {isBotTyping && (
-               <div className="flex self-start gap-1 px-3 py-3 bg-gray-200 rounded-r-2xl rounded-tl-2xl">
-                  <div className="w-2 h-2 rounded-full bg-gray-800 animate-pulse"></div>
-                  <div className="w-2 h-2 rounded-full bg-gray-800 animate-pulse [animation-delay:0.3s]"></div>
-                  <div className="w-2 h-2 rounded-full bg-gray-800 animate-pulse [animation-delay:0.6s]"></div>
-               </div>
-            )}
+            {isBotTyping && <TypingIndicator />}
             {error && <p className="text-red-500">{error}</p>}
          </div>
          <form
