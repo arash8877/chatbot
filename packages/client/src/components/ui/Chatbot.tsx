@@ -58,8 +58,8 @@ const Chatbot = () => {
    }
 
    return (
-      <div>
-         <div className="flex flex-col gap-3 mb-10">
+      <div className='flex flex-col h-full'>
+         <div className="flex flex-col flex-1 gap-3 mb-10">
             {messages.map((message, index) => (
                <p
                   key={index}
