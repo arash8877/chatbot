@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from '../ui/button';
 import axios from 'axios';
 import { FaArrowUp } from 'react-icons/fa';
-import ReactMarkdown from 'react-markdown';
+import ChatMessages from './ChatMessages';
+import type { Message } from './ChatMessages';
 import TypingIndicator from './TypingIndicator';
 
 type FormData = {
@@ -11,12 +12,7 @@ type FormData = {
 };
 
 type ChatResponse = {
-   message: string;
-};
-
-type Message = {
-   content: string;
-   role: 'user' | 'bot';
+   message: string[];
 };
 
 const Chatbot = () => {
@@ -24,12 +20,7 @@ const Chatbot = () => {
    const [isBotTyping, setIsBotTyping] = useState(false);
    const [error, setError] = useState('');
    const conversationId = useRef(crypto.randomUUID());
-   const lastMessageRef = useRef<HTMLDivElement | null>(null);
    const { register, handleSubmit, reset, formState } = useForm<FormData>();
-
-   useEffect(() => {
-      lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
-   }, [messages]);
 
    const onSubmit = async ({ prompt }: FormData) => {
       try {
@@ -39,12 +30,13 @@ const Chatbot = () => {
 
          reset({ prompt: '' });
 
-         // await new Promise((resolve) => setTimeout(resolve, 5000)); 
+         // await new Promise((resolve) => setTimeout(resolve, 5000));
 
          const { data } = await axios.post<ChatResponse>('/api/chat', {
             prompt: prompt,
             conversationId: conversationId.current,
          });
+          // @ts-ignore
          setMessages((prev) => [
             ...prev,
             { content: data.message, role: 'bot' },
@@ -64,31 +56,10 @@ const Chatbot = () => {
       }
    };
 
-   const onCopyMessage = (e: React.ClipboardEvent) => {
-      const selection = window.getSelection()?.toString().trim();
-      if (selection) {
-         e.preventDefault();
-         e.clipboardData.setData('text/plain', selection);
-      }
-   };
-
    return (
       <div className="flex flex-col h-full">
          <div className="flex flex-col flex-1 gap-3 mb-10 overflow-y-auto">
-            {messages.map((message, index) => (
-               <div
-                  key={index}
-                  onCopy={onCopyMessage}
-                  ref={index === messages.length - 1 ? lastMessageRef : null}
-                  className={`px-3 py-1 ${
-                     message.role === 'user'
-                        ? 'bg-blue-600 text-white self-end rounded-l-2xl rounded-tr-2xl'
-                        : 'bg-gray-200 text-black self-start rounded-r-2xl rounded-tl-2xl'
-                  }`}
-               >
-                  <ReactMarkdown>{message.content}</ReactMarkdown>
-               </div>
-            ))}
+            <ChatMessages messages={messages} />
             {isBotTyping && <TypingIndicator />}
             {error && <p className="text-red-500">{error}</p>}
          </div>
