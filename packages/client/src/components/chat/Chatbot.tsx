@@ -35,7 +35,7 @@ const Chatbot = () => {
             prompt: prompt,
             conversationId: conversationId.current,
          });
-         // @ts-ignore
+         // @ts-expect-error The API returns message as string[], but Message expects a string; adjust as needed.
          setMessages((prev) => [
             ...prev,
             { content: data.message, role: 'bot' },
