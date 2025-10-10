@@ -21,4 +21,7 @@ router.post('/api/chat', chatController.sendMessage);
 // Get reviews for a specific product
 router.get('/api/products/:id/reviews', reviewController.getReviews);
 
+// Make summary of reviews for a specific product
+router.post('/api/products/:id/reviews/summarize', reviewController.summarizeReviews);
+
 export default router;
