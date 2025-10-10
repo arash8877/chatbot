@@ -1,5 +1,5 @@
-import openai from 'openai';
 import { type Review } from '../generated/prisma';
+import { llmClient } from '../llm/client';
 import { reviewRepository } from '../repositories/review.repository';
 
 export const reviewService = {
@@ -14,20 +14,12 @@ export const reviewService = {
 
       // send the reviews to LLM to summarize
       const prompt = `Summarize the following customer reviews in to a short paragraph. Highlighting key themes, both positive and negative: ${joinedReviews} `;
-      const response = await client?.responses.create({
+      const response = llmClient.generateText({
          model: 'gpt-4.1',
-         input: prompt,
+         prompt,
          temperature: 0.2,
-         max_output_tokens: 500,
-      })
-      return response?.output_text ?? '';
+         maxTokens: 500,
+      });
+      return (await response).text;
    },
 };
-
-// const client = new openai.OpenAI({
-// apiKey: process.env.OPENAI_API_KEY,
-// });
-
-const client = process.env.OPENAI_API_KEY // alternative for no api key
-   ? new openai({ apiKey: process.env.OPENAI_API_KEY })
-   : null;
