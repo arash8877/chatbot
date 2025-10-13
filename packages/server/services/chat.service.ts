@@ -14,7 +14,8 @@ export const chatService = {
       conversationId: string
    ): Promise<chatResponse> {
       const response = await llmClient.generateText({
-         model: 'gpt-4o-mini',
+         // model: 'gpt-4o-mini',
+         model: 'gemini-2.5-flash',
          instructions: 'You are a helpful customer support assistant.',
          prompt,
          temperature: 0.2,

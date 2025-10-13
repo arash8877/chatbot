@@ -29,7 +29,7 @@ const Chatbot = () => {
          setError('');
          popAudio.play();
 
-         await new Promise((resolve) => setTimeout(resolve, 5000));
+         // await new Promise((resolve) => setTimeout(resolve, 5000));
 
          const { data } = await axios.post<ChatResponse>('/api/chat', {
             prompt: prompt,
