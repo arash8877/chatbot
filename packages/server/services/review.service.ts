@@ -1,18 +1,12 @@
-import { type Review } from '../generated/prisma';
 import { llmClient } from '../llm/client';
 import { reviewRepository } from '../repositories/review.repository';
 import template from '../llm/prompts/summarize-reviews.txt';
 
 export const reviewService = {
-   async getReviews(productId: number): Promise<Review[]> {
-      return reviewRepository.getReviews(productId);
-   },
-
    async summarizeReviews(productId: number): Promise<string> {
       const existingSummary = await reviewRepository.getReviewSummary(productId);
-      if (existingSummary && existingSummary.expiresAt > new Date()) {
-          console.log('[✅] Returning cached summary');
-         return existingSummary.content;
+      if (existingSummary) {
+         return existingSummary;
       }
 
       // get the last 10 reviews
