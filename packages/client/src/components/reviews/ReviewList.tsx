@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 import StarRating from './StarRating';
 import ReviewSkeleton from './ReviewSkeleton';
+import { useQuery } from '@tanstack/react-query';
 
 type ReviewListProps = {
    productId: number;
@@ -21,28 +21,47 @@ type GetReviewsResponseProps = {
 };
 
 const ReviewList = ({ productId }: ReviewListProps) => {
-   const [reviewData, setReviewData] = useState<GetReviewsResponseProps>();
-   const [isLoading, setIsLoading] = useState(false);
-   const [error, setError] = useState('');
+   const {
+      data: reviewData,
+      isLoading,
+      error,
+   } = useQuery<GetReviewsResponseProps>({
+      queryKey: ['reviews', productId],
+      queryFn: () => fetchReviews(),
+   });
+
+   // By using React Query, we no longer need to manage state and side effects manually
+   // React Query also manage caching, refetching 3 times, error handling, and background updates behind the scenes
+
+   //    const [reviewData, setReviewData] = useState<GetReviewsResponseProps>();
+   //    const [isLoading, setIsLoading] = useState(false);
+   //    const [error, setError] = useState('');
+
+   //    const fetchReviews = async () => {
+   //       try {
+   //          setIsLoading(true);
+   //          const { data } = await axios.get<GetReviewsResponseProps>(
+   //             `/api/products/${productId}/reviews`
+   //          );
+   //          setReviewData(data);
+   //       } catch (error) {
+   //          console.log(error);
+   //          setError('Could not fetch the reviews. Try again!');
+   //       } finally {
+   //          setIsLoading(false);
+   //       }
+   //    };
+
+   //    useEffect(() => {
+   //       fetchReviews();
+   //    }, []);
 
    const fetchReviews = async () => {
-      try {
-         setIsLoading(true);
-         const { data } = await axios.get<GetReviewsResponseProps>(
-            `/api/products/${productId}/reviews`
-         );
-         setReviewData(data);
-      } catch (error) {
-         console.log(error);
-         setError('Could not fetch the reviews. Try again!');
-      } finally {
-         setIsLoading(false);
-      }
+      const { data } = await axios.get<GetReviewsResponseProps>(
+         `/api/products/${productId}/reviews`
+      );
+      return data;
    };
-
-   useEffect(() => {
-      fetchReviews();
-   }, []);
 
    if (isLoading) {
       return (
@@ -55,7 +74,7 @@ const ReviewList = ({ productId }: ReviewListProps) => {
    }
 
    if (error) {
-      return <div className="text-red-500">{error}</div>;
+      return <div className="text-red-500">{error.message}</div>;
    }
 
    return (
