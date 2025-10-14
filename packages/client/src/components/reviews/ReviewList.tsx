@@ -1,29 +1,16 @@
-import axios from 'axios';
 import StarRating from './StarRating';
 import { HiSparkles } from 'react-icons/hi2';
 import ReviewSkeleton from './ReviewSkeleton';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { Button } from '../ui/button';
+import {
+   reviewsApi,
+   type GetReviewsResponseProps,
+   type SummarizeResponseProps,
+} from './reviewsApi';
 
 type ReviewListProps = {
    productId: number;
-};
-
-type ReviewProps = {
-   id: number;
-   author: string;
-   content: string;
-   rating: number;
-   createdAt: string;
-};
-
-type GetReviewsResponseProps = {
-   summary: string | null;
-   reviews: ReviewProps[];
-};
-
-type SummarizeResponseProps = {
-   summary: string;
 };
 
 //---------------------------- Main Function ----------------------------//
@@ -34,7 +21,7 @@ const ReviewList = ({ productId }: ReviewListProps) => {
       error,
    } = useQuery<GetReviewsResponseProps>({
       queryKey: ['reviews', productId],
-      queryFn: () => fetchReviews(),
+      queryFn: () => reviewsApi.fetchReviews(productId),
    });
 
    const {
@@ -43,7 +30,7 @@ const ReviewList = ({ productId }: ReviewListProps) => {
       isError: isSummaryError,
       data: summarizeResponse,
    } = useMutation<SummarizeResponseProps>({
-      mutationFn: () => summarizeReviews(),
+      mutationFn: () => reviewsApi.summarizeReviews(productId),
    });
 
    // By using React Query, we no longer need to manage state and side effects manually
@@ -91,20 +78,6 @@ const ReviewList = ({ productId }: ReviewListProps) => {
    //       setIsSummaryLoading(false);
    //    }
    // };
-
-   const summarizeReviews = async () => {
-      const { data } = await axios.post<SummarizeResponseProps>(
-         `/api/products/${productId}/reviews/summarize`
-      );
-      return data;
-   };
-
-   const fetchReviews = async () => {
-      const { data } = await axios.get<GetReviewsResponseProps>(
-         `/api/products/${productId}/reviews`
-      );
-      return data;
-   };
 
    if (isLoading) {
       return (
