@@ -30,6 +30,7 @@ type SummarizeResponseProps = {
 //---------------------------- Main Function ----------------------------//
 const ReviewList = ({ productId }: ReviewListProps) => {
    const [summary, setSummary] = useState('');
+   const [isSummaryLoading, setIsSummaryLoading] = useState(false);
    const {
       data: reviewData,
       isLoading,
@@ -66,10 +67,13 @@ const ReviewList = ({ productId }: ReviewListProps) => {
    //    }, []);
 
    const handleSummarize = async () => {
+      setIsSummaryLoading(true);
+
       const { data } = await axios.post<SummarizeResponseProps>(
          `/api/products/${productId}/reviews/summarize`
       );
       setSummary(data.summary);
+      setIsSummaryLoading(false);
    };
 
    const fetchReviews = async () => {
@@ -105,10 +109,17 @@ const ReviewList = ({ productId }: ReviewListProps) => {
             {currentSummary ? (
                <p>{currentSummary}</p>
             ) : (
-               <Button onClick={handleSummarize}>
-                  <HiSparkles />
-                  Summarize
-               </Button>
+               <div>
+                  <Button onClick={handleSummarize} className='cursor-pointer' disabled={isSummaryLoading}>
+                     <HiSparkles />
+                     Summarize
+                  </Button>
+                  {isSummaryLoading && (
+                     <div className="py-3">
+                        <ReviewSkeleton />
+                     </div>
+                  )}
+               </div>
             )}
          </div>
          <div className="flex flex-col gap-5">
