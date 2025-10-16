@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Bot, FileText, TreePine } from 'lucide-react';
 
 export function Navbar() {
-   const [activeItem, setActiveItem] = useState('chatbot');
 
    const navItems = [
       {
@@ -14,7 +12,7 @@ export function Navbar() {
       },
       {
          id: 'summarizer',
-         name: 'summarizer',
+         name: 'Summarizer',
          icon: <FileText size={18} />,
          path: '/summarizer',
       },
@@ -25,7 +23,7 @@ export function Navbar() {
          {/* Logo */}
          <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-blue-500 text-white font-bold flex items-center justify-center rounded-full">
-                <TreePine size={18} />
+               <TreePine size={18} />
             </div>
             <span className="font-semibold text-lg">TivoliBot</span>
          </div>
@@ -36,12 +34,13 @@ export function Navbar() {
                <NavLink
                   key={item.id}
                   to={item.path}
-                  onClick={() => setActiveItem(item.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                     activeItem === item.id
-                        ? 'bg-blue-500 text-white shadow-md scale-105'
-                        : 'text-gray-600 hover:text-blue-500'
-                  }`}
+                  className={({ isActive }) =>
+                     `flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                        isActive
+                           ? 'bg-blue-500 text-white shadow-md scale-105'
+                           : 'text-gray-600 hover:text-blue-500'
+                     }`
+                  }
                >
                   {item.icon}
                   {item.name}
