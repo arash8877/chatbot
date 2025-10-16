@@ -18,7 +18,7 @@ function App() {
                <Route path="/chatbot" element={<Chatbot />} />
                <Route
                   path="/summarizer"
-                  element={<ReviewList productId={3} />}
+                  element={<ReviewList productId={4} />}
                />
             </Routes>
          </main>
