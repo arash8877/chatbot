@@ -3,45 +3,50 @@ import { PrismaClient } from '../generated/prisma';
 const prisma = new PrismaClient();
 
 async function main() {
+  console.log('Seeding database URL:', process.env.DATABASE_URL);
+
   console.log('🌱 Seeding started...');
+
+// --- Clear old data safely ---
+await prisma.$transaction([
+  prisma.summary.deleteMany({}),
+  prisma.review.deleteMany({}),
+  prisma.product.deleteMany({}),
+]);
+
 
   // --- Create Products ---
   const products = await prisma.product.createMany({
     data: [
       {
         id: 1,
-        name: 'Aurora Smart Lamp',
-        description:
-          'A voice-controlled smart lamp with adaptive brightness and mood-based lighting presets.',
-        price: 89.99,
+        name: 'Aquila',
+        description: 'A thrilling roller coaster that soars high above the park with breathtaking loops and drops.',
+        price: 45.0,
       },
       {
         id: 2,
-        name: 'Nimbus Noise-Cancelling Headphones',
-        description:
-          'Over-ear wireless headphones with active noise cancellation and immersive sound.',
-        price: 199.5,
+        name: 'Fatamorgana',
+        description: 'An enchanting dark ride through mystical scenes, illusions, and magical storytelling.',
+        price: 38.5,
       },
       {
         id: 3,
-        name: 'VitaBlend Pro 5000 Blender',
-        description:
-          'A professional-grade blender designed for smoothies, soups, and frozen desserts.',
-        price: 149.0,
+        name: 'The Dragon Boats',
+        description: 'A gentle water ride with vibrant dragon-themed boats, perfect for families.',
+        price: 25.0,
       },
       {
         id: 4,
-        name: 'TerraBrew Coffee Maker',
-        description:
-          'An intelligent coffee maker that learns your brewing preferences and syncs with your phone.',
-        price: 129.95,
+        name: 'The Golden Tower',
+        description: 'A towering drop ride that offers a mix of adrenaline and stunning park views.',
+        price: 42.75,
       },
       {
         id: 5,
-        name: 'AeroMat Pro Yoga Mat',
-        description:
-          'A high-density, eco-friendly yoga mat built for comfort and durability.',
-        price: 59.99,
+        name: 'The Demon',
+        description: 'An intense roller coaster with high speeds, inversions, and heart-pounding excitement.',
+        price: 50.0,
       },
     ],
     skipDuplicates: true,
@@ -52,188 +57,139 @@ async function main() {
   // --- Create Reviews ---
   await prisma.review.createMany({
     data: [
-      // Product 1: Aurora Smart Lamp
+      // Product 1: Aquila
       {
-        author: 'Emily Johnson',
+        author: 'Emma L.',
         rating: 5,
-        content:
-          'The Aurora Smart Lamp completely changed my nighttime routine. The adaptive lighting automatically adjusts to my mood and the voice commands are incredibly responsive. It even syncs with my bedtime playlist—pure magic.',
+        content: 'Aquila gave me the ride of my life! The drops were exhilarating and the loops felt like flying. Absolutely loved it!',
         productId: 1,
       },
       {
-        author: 'Lucas Reed',
+        author: 'Liam P.',
         rating: 4,
-        content:
-          'Beautiful design and functionality! The only thing I wish it had was a built-in battery for portability, but the lighting quality and app control are outstanding.',
+        content: 'The speed and height of Aquila are insane. A few parts were scary, but that is what makes it fun!',
         productId: 1,
       },
       {
-        author: 'Sophia Martinez',
+        author: 'Sophia R.',
         rating: 5,
-        content:
-          'This lamp has made my reading corner so much more inviting. The soft glow is perfect, and I love that I can change the color temperature with just a phrase.',
+        content: 'Every twist on Aquila kept me on the edge of my seat. The engineering and thrills are top-notch.',
         productId: 1,
       },
       {
-        author: 'David Kim',
+        author: 'Noah M.',
         rating: 4,
-        content:
-          'Setup was super simple, and I love the mood presets. The “Sunset Calm” mode helps me unwind after long days. Slight lag when using Alexa, but not a dealbreaker.',
-        productId: 1,
-      },
-      {
-        author: 'Rachel Nguyen',
-        rating: 5,
-        content:
-          'Honestly the best lamp I’ve ever owned. It’s sleek, intuitive, and feels like part of my smart home ecosystem seamlessly.',
+        content: 'Aquila is amazing, but the line was a bit long. Still, the ride experience was totally worth it.',
         productId: 1,
       },
 
-      // Product 2: Nimbus Noise-Cancelling Headphones
+      // Product 2: Fatamorgana
       {
-        author: 'Mark Peterson',
+        author: 'Olivia K.',
         rating: 5,
-        content:
-          'The Nimbus headphones completely block out my noisy office. The sound quality is rich, with deep bass and crystal-clear highs. I can wear them for hours without discomfort.',
+        content: 'Fatamorgana is magical! The visuals and illusions transported me to another world. Highly recommend for all ages.',
         productId: 2,
       },
       {
-        author: 'Olivia Brown',
+        author: 'Ethan S.',
         rating: 4,
-        content:
-          'Amazing noise cancellation and comfort! They feel premium, though I wish the battery life were slightly longer. Still, the soundstage is phenomenal.',
+        content: 'The attention to detail in Fatamorgana is incredible. Very immersive and perfect for a calm, fun ride.',
         productId: 2,
       },
       {
-        author: 'James Allen',
+        author: 'Ava J.',
         rating: 5,
-        content:
-          'Perfect for flights. The ANC works wonders, and I’ve rediscovered my favorite albums with the clarity these provide.',
+        content: 'Loved the mystical scenes in Fatamorgana. Felt like stepping into a fairytale. A must-visit attraction!',
         productId: 2,
       },
       {
-        author: 'Hannah Lee',
-        rating: 5,
-        content:
-          'I’ve tried many headphones, but Nimbus takes the crown. The app customization and ambient mode make it so versatile.',
-        productId: 2,
-      },
-      {
-        author: 'Ethan Clark',
+        author: 'Mason B.',
         rating: 4,
-        content:
-          'Incredible sound. I love the soft earcups and how they mold to my head. Only minor issue is the touch controls can be too sensitive.',
+        content: 'Fatamorgana is enchanting. Kids will love it, and adults can appreciate the creativity too.',
         productId: 2,
       },
 
-      // Product 3: VitaBlend Pro 5000 Blender
+      // Product 3: The Dragon Boats
       {
-        author: 'Sarah Wilson',
+        author: 'Isabella T.',
         rating: 5,
-        content:
-          'The VitaBlend Pro 5000 makes the smoothest smoothies I’ve ever had. It crushes frozen fruit effortlessly and even makes silky soups.',
+        content: 'The Dragon Boats are so cute and fun. Perfect for a relaxing ride while enjoying the water scenery.',
         productId: 3,
       },
       {
-        author: 'Daniel Rivera',
+        author: 'Lucas F.',
         rating: 4,
-        content:
-          'A powerhouse of a blender! It’s a bit loud, but that’s understandable for its performance. Cleanup is easy, and I use it daily.',
+        content: 'A very charming ride. The dragons are colorful and the boat ride is peaceful. Great for families.',
         productId: 3,
       },
       {
-        author: 'Ava Thompson',
+        author: 'Mia H.',
         rating: 5,
-        content:
-          'I love how quickly it blends everything. My morning protein shakes have never been smoother. The pulse function is a game changer.',
+        content: 'The Dragon Boats made our family day perfect. The ride is gentle yet entertaining for everyone.',
         productId: 3,
       },
       {
-        author: 'Michael Carter',
-        rating: 5,
-        content:
-          'I use this for meal prep, sauces, and even nut butters. It’s durable and feels professional-grade. Definitely worth the investment.',
-        productId: 3,
-      },
-      {
-        author: 'Lily Adams',
+        author: 'Benjamin G.',
         rating: 4,
-        content:
-          'It’s my kitchen MVP. The power is unmatched, but the lid can be a bit tricky to lock in place sometimes.',
+        content: 'Fun ride on The Dragon Boats. The theme is delightful and it’s an easy way to enjoy some water fun.',
         productId: 3,
       },
 
-      // Product 4: TerraBrew Coffee Maker
+      // Product 4: The Golden Tower
       {
-        author: 'John Roberts',
+        author: 'Charlotte W.',
         rating: 5,
-        content:
-          'The TerraBrew is like having a barista at home. It remembers how I like my morning coffee and adjusts the brew strength automatically.',
+        content: 'The Golden Tower gave me the most thrilling drop! The view from the top was spectacular and nerve-wracking!',
         productId: 4,
       },
       {
-        author: 'Isabella Torres',
-        rating: 5,
-        content:
-          'The app connectivity is genius. I can start brewing from bed and walk into the kitchen with a fresh cup waiting. The aroma alone is worth it.',
-        productId: 4,
-      },
-      {
-        author: 'William Scott',
+        author: 'James D.',
         rating: 4,
-        content:
-          'Excellent brewing consistency and design. The water temperature control is precise, giving me better-tasting coffee than most cafés.',
+        content: 'I loved the adrenaline rush from The Golden Tower. The height is impressive and the drop is intense.',
         productId: 4,
       },
       {
-        author: 'Chloe White',
+        author: 'Amelia C.',
         rating: 5,
-        content:
-          'Stylish, smart, and super easy to use. I love that it recommends new coffee blends based on my preferences.',
+        content: 'An incredible ride! The Golden Tower combines fear and excitement perfectly. Highly recommended.',
         productId: 4,
       },
       {
-        author: 'Benjamin Davis',
+        author: 'Henry K.',
         rating: 4,
-        content:
-          'Brews delicious coffee every time. Slightly bulky for my small counter space, but totally worth it.',
+        content: 'The tower is majestic and thrilling. The wait was long, but the drop made it all worth it.',
         productId: 4,
       },
 
-      // Product 5: AeroMat Pro Yoga Mat
+      // Product 5: The Demon
       {
-        author: 'Natalie Brooks',
+        author: 'Ella V.',
         rating: 5,
-        content:
-          'The AeroMat Pro is a dream to practice on. It grips perfectly during hot yoga and still feels cushioned for my knees.',
+        content: 'The Demon is a heart-stopping roller coaster! High speed, twists, and inversions – an adrenaline junkie’s dream.',
         productId: 5,
       },
       {
-        author: 'Jacob Green',
+        author: 'Alexander R.',
         rating: 5,
-        content:
-          'Extremely durable and comfortable. I’ve been using it daily for months and it still looks brand new. The eco-friendly material is a huge plus.',
+        content: 'I screamed the entire ride! The Demon is intense and perfectly designed for thrill-seekers.',
         productId: 5,
       },
       {
-        author: 'Ella Watson',
+        author: 'Grace N.',
         rating: 4,
-        content:
-          'This mat strikes the perfect balance between firm support and soft texture. I just wish it came with a carrying strap.',
+        content: 'The Demon delivers extreme excitement. A few moments are terrifying, but in the best way possible.',
         productId: 5,
       },
       {
-        author: 'Ryan Murphy',
+        author: 'William S.',
         rating: 5,
-        content:
-          'No slipping, no sliding—just focus and flow. The mat stays flat even after being rolled up tightly.',
+        content: 'Incredible ride! The Demon keeps you on edge with every twist and turn. Definitely a highlight of Tivoli.',
         productId: 5,
       },
       {
-        author: 'Mia Hernandez',
-        rating: 5,
-        content:
-          'Beautiful color, perfect thickness, and feels luxurious. My yoga sessions have never felt more grounded.',
+        author: 'Sofia P.',
+        rating: 4,
+        content: 'The Demon is amazing for those who love roller coasters. Fast, twisting, and full of surprises.',
         productId: 5,
       },
     ],
