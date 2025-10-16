@@ -1,5 +1,14 @@
+import fs from 'fs';
+import path from 'path';
+import template from '../llm/prompts/chatbot.txt'
 import { llmClient } from '../llm/client';
 import { conversationRepository } from '../repositories/conversation.repository';
+
+const parkInfo = fs.readFileSync(
+   path.join(__dirname, '..', 'llm', 'prompts', 'Tivoli.md'),
+   'utf-8'
+);
+const instructions = template.replace('{{parkInfo}}', parkInfo);
 
 
 
@@ -16,7 +25,7 @@ export const chatService = {
       const response = await llmClient.generateText({
          // model: 'gpt-4o-mini',
          model: 'gemini-2.5-flash',
-         instructions: 'You are a helpful customer support assistant.',
+         instructions,
          prompt,
          temperature: 0.2,
          maxTokens: 100,

@@ -71,7 +71,7 @@ export const llmClient = {
     prompt,
     instructions,
     temperature = 0.2,
-    maxTokens = 2500,
+    maxTokens = 5500,
   }: GenerateTextOptions): Promise<GenerateTextResult> {
     const fullPrompt =
       instructions && instructions.trim().length > 0
