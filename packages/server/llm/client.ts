@@ -45,9 +45,11 @@
 //       };
 //    },
 // };
-
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenAI, FinishReason } from '@google/genai'; // Import FinishReason
 import crypto from 'crypto';
+
+// The maximum allowed output tokens for gemini-2.5-flash-lite
+const MAX_MODEL_OUTPUT_TOKENS = 65536;
 
 const client = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
 const modelsClient = client.models;
@@ -55,78 +57,72 @@ const modelsClient = client.models;
 type GenerateTextOptions = {
   model?: string;
   prompt: string;
-  instructions?: string;
+  instructions?: string; // Will be passed as systemInstruction
   temperature?: number;
-  maxTokens?: number;
+  maxOutputTokens?: number; // Renamed for consistency with the API
 };
 
 type GenerateTextResult = {
   id: string;
   text: string;
+  truncated: boolean; // Indicate if the response was cut off
 };
 
 export const llmClient = {
   async generateText({
-    model = 'gemini-2.5-flash',
+    model = 'gemini-2.5-flash-lite',
     prompt,
     instructions,
     temperature = 0.2,
-    maxTokens = 5500,
+    maxOutputTokens = MAX_MODEL_OUTPUT_TOKENS,
   }: GenerateTextOptions): Promise<GenerateTextResult> {
-    const fullPrompt =
-      instructions && instructions.trim().length > 0
-        ? `${instructions}\n\n${prompt}`
-        : prompt;
+    
+    // 1. Cap tokens to the model's actual maximum
+    const finalMaxTokens = Math.min(maxOutputTokens, MAX_MODEL_OUTPUT_TOKENS);
+    
+    // 2. Use dedicated systemInstruction field for better performance/adherence
+    const systemInstruction = (instructions ?? '').trim() || undefined;
 
-    const callGemini = async (tokens: number) => {
+    try {
       const result = await modelsClient.generateContent({
         model,
-        contents: [{ role: 'user', parts: [{ text: fullPrompt }] }],
+        contents: [{ role: 'user', parts: [{ text: prompt }] }],
         config: {
           temperature,
-          maxOutputTokens: tokens,
+          maxOutputTokens: finalMaxTokens,
+          systemInstruction: systemInstruction, // Best practice for instructions
         },
       });
 
-      // 🧠 Safely extract text
-      let text = '';
+      // 3. Simple and reliable text extraction
+      const text = result.text ?? '';
       const candidate = result.candidates?.[0];
-      const content = (candidate?.content as any)?.parts ?? [];
+      const finishReason = candidate?.finishReason;
+      
+      const wasTruncated = finishReason === FinishReason.MAX_TOKENS;
 
-      if (Array.isArray(content) && content[0]?.text) {
-        text = content.map((p: any) => p.text).join('\n');
-      } else if ((result as any).text) {
-        // fallback if SDK provides a text field
-        text = (result as any).text;
+      if (wasTruncated) {
+        console.warn(`[⚠️] Gemini hit MAX_TOKENS (${finalMaxTokens}). Response was truncated.`);
       }
 
-      // ⚠️ Log when Gemini ran out of tokens
-      if (candidate?.finishReason === 'MAX_TOKENS') {
-        console.warn('[⚠️] Gemini hit max tokens — retrying with higher limit');
+      if (!text.trim()) {
+        console.warn('[⚠️] Gemini returned empty text.');
+        return {
+          id: crypto.randomUUID(),
+          text: 'No answer available.',
+          truncated: wasTruncated,
+        };
       }
 
-      return { text, maxedOut: candidate?.finishReason === 'MAX_TOKENS', result };
-    };
-
-    // 🌀 First attempt
-    let { text, maxedOut } = await callGemini(maxTokens);
-
-    // 🚀 Retry once if empty or truncated
-    if (!text.trim() || maxedOut) {
-      const retryTokens = Math.min(maxTokens * 2, 8000); // Gemini’s soft cap
-      console.warn(`[🔁] Retrying with ${retryTokens} tokens...`);
-      const retry = await callGemini(retryTokens);
-      text = retry.text;
+      return {
+        id: crypto.randomUUID(),
+        text,
+        truncated: wasTruncated,
+      };
+    } catch (error) {
+      // 4. Critical: Handle API/network errors gracefully
+      console.error('[❌] Gemini API Call Failed:', error);
+      throw new Error(`LLM generation failed: ${error instanceof Error ? error.message : String(error)}`);
     }
-
-    if (!text.trim()) {
-      console.warn('[⚠️] Gemini returned empty text after retry.');
-      text = 'No summary available.';
-    }
-
-    return {
-      id: crypto.randomUUID(),
-      text,
-    };
   },
 };

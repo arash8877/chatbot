@@ -8,7 +8,16 @@ const parkInfo = fs.readFileSync(
    path.join(__dirname, '..', 'llm', 'prompts', 'Tivoli.md'),
    'utf-8'
 );
-const instructions = template.replace('{{parkInfo}}', parkInfo);
+
+const today = new Date().toLocaleDateString('en-GB', {
+   weekday: 'long',
+   year: 'numeric',
+   month: 'long',
+   day: 'numeric',
+});
+
+const instructions = template.replace('{{parkInfo}}', parkInfo)
+.replace('{{current date}}', today);;
 
 
 
@@ -22,16 +31,19 @@ export const chatService = {
       prompt: string,
       conversationId: string
    ): Promise<chatResponse> {
-      const response = await llmClient.generateText({
+      const options: any = {
          // model: 'gpt-4o-mini',
-         model: 'gemini-2.5-flash',
+         model: 'gemini-2.5-flash-lite',
          instructions,
          prompt,
          temperature: 0.2,
-         maxTokens: 100,
-         previousResponseId:
-            conversationRepository.getLastResponseId(conversationId),
-      });
+         maxTokens: 65536,
+      };
+      const lastResponseId = conversationRepository.getLastResponseId(conversationId);
+      if (lastResponseId) {
+         options.previousResponseId = lastResponseId;
+      }
+      const response = await llmClient.generateText(options);
       conversationRepository.setLastResponseId(conversationId, response.id);
 
       return {

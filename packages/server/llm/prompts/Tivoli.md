@@ -5,9 +5,9 @@
 
 ## 🎟️ Ticket & Pricing Information
 
-| Ticket Type                | Price (DKK) | Notes                                 |
+| Ticket Type               | Price (DKK) | Notes                                 |
 |---------------------------|-------------|---------------------------------------|
-| Tivoli Pass.              | 449 DKK     | Unlimited access to Tivoli Garden     |
+| Tivoli Pass               | 449 DKK     | Unlimited access to Tivoli Garden     |
 | Child Entrance (3–7)      | 95 DKK      | Under 3 enters free                   |
 | Ride Pass                 | 189 DKK     | Include all rides                     |
 | Entrance and Ride Pass    | 359 DKK     | Try all rides as much as you want     |

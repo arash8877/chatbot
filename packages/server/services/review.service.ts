@@ -17,10 +17,10 @@ export const reviewService = {
       const prompt = template.replace('{{reviews}}', joinedReviews);
 
       const response = await llmClient.generateText({
-         model: 'gemini-2.5-flash',
+         model: 'gemini-2.5-flash-lite',
          prompt,
          temperature: 0.2,
-         maxTokens: 800,
+         maxTokens: 65536,
       });
       
       const summary = response.text;
