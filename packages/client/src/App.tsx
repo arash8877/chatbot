@@ -11,19 +11,17 @@ import {
 function App() {
    return (
       <Router>
-         <div className="p-4 h-screen max-full">
-            <Navbar />
-            <main className="flex-1 p-6 overflow-y-auto bg-gray-50">
-               <Routes>
-                  <Route path="/" element={<Navigate to="/chatbot" />} />
-                  <Route path="/chatbot" element={<Chatbot />} />
-                  <Route
-                     path="/summarizer"
-                     element={<ReviewList productId={3} />}
-                  />
-               </Routes>
-            </main>
-         </div>
+         <Navbar />
+         <main className="p-4 h-[calc(100vh-4rem)] max-full">
+            <Routes>
+               <Route path="/" element={<Navigate to="/chatbot" />} />
+               <Route path="/chatbot" element={<Chatbot />} />
+               <Route
+                  path="/summarizer"
+                  element={<ReviewList productId={3} />}
+               />
+            </Routes>
+         </main>
       </Router>
    );
 }

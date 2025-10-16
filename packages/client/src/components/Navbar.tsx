@@ -17,7 +17,7 @@ export function Navbar() {
         <div className="w-8 h-8 bg-blue-500 text-white font-bold flex items-center justify-center rounded-full">
           T
         </div>
-        <span className="font-semibold text-lg">TrialBot</span>
+        <span className="font-semibold text-lg">TivoliBot</span>
       </div>
 
       {/* Nav Items */}
