@@ -46,7 +46,7 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="relative flex flex-col h-[calc(100vh-6rem)] max-w-3xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+    <div className="relative flex flex-col h-[calc(100vh-7rem)] max-w-3xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white">
         <h2 className="text-lg font-semibold tracking-wide flex items-center gap-2">

@@ -12,7 +12,7 @@ function App() {
    return (
       <Router>
          <Navbar />
-         <main className="p-4 h-[calc(100vh-4rem)] max-full">
+         <main className="p-4 h-[calc(100vh-7rem)] max-full">
             <Routes>
                <Route path="/" element={<Navigate to="/chatbot" />} />
                <Route path="/chatbot" element={<Chatbot />} />

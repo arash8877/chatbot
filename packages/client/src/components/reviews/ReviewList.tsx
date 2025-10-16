@@ -108,7 +108,7 @@ const ReviewList = ({ productId }: ReviewListProps) => {
          <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
                <HiSparkles className="text-yellow-500" />
-               Review Summarizer
+               Reviews Summary
             </h2>
             <span className="text-sm text-gray-500">
                {reviewData?.reviews.length} review

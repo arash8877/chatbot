@@ -1,8 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import { Bot, FileText, TreePine } from 'lucide-react';
+import { Bot, FileText } from 'lucide-react';
 
 export function Navbar() {
-
    const navItems = [
       {
          id: 'chatbot',
@@ -19,13 +18,17 @@ export function Navbar() {
    ];
 
    return (
-      <nav className="flex items-center justify-between px-6 py-3 bg-white shadow-sm border-b border-gray-200">
+      <nav className="flex items-center justify-between px-6 bg-white shadow-sm border-b border-gray-200">
          {/* Logo */}
          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-blue-500 text-white font-bold flex items-center justify-center rounded-full">
-               <TreePine size={18} />
-            </div>
-            <span className="font-semibold text-lg">TivoliBot</span>
+            <img
+               src="/tivoli-logo.png"
+               alt="Tivoli Logo"
+               className="w-20 h-20 object-contain"
+            />
+            <span className="font-bold text-xl text-blue-500">
+               Bot
+            </span>
          </div>
 
          {/* Nav Items */}
