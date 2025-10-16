@@ -1,6 +1,6 @@
 import Chatbot from './components/chat/Chatbot';
-import ReviewList from './components/reviews/ReviewList';
-import { Navbar } from './components/Navbar';
+import SummarizerPage from './pages/SummarizerPage';
+import { Navbar } from './components/ui/Navbar';
 import {
    BrowserRouter as Router,
    Routes,
@@ -18,7 +18,7 @@ function App() {
                <Route path="/chatbot" element={<Chatbot />} />
                <Route
                   path="/summarizer"
-                  element={<ReviewList productId={4} />}
+                  element={<SummarizerPage />}
                />
             </Routes>
          </main>

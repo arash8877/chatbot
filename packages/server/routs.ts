@@ -2,6 +2,7 @@ import { Router } from 'express';
 import type { Request, Response } from 'express';
 import { chatController } from './controllers/chat.controller';
 import { reviewController } from './controllers/review.controller';
+import { productController } from './controllers/product.controller';
 
 const router = Router();
 
@@ -23,5 +24,8 @@ router.get('/api/products/:id/reviews', reviewController.getReviews);
 
 // Make summary of reviews for a specific product
 router.post('/api/products/:id/reviews/summarize', reviewController.summarizeReviews);
+
+// Get list of products
+router.get('/api/products', productController.getProducts);
 
 export default router;

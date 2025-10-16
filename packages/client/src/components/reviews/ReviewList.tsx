@@ -81,7 +81,7 @@ const ReviewList = ({ productId }: ReviewListProps) => {
 
    if (isLoading) {
       return (
-         <div className="flex flex-col gap-5">
+         <div className="flex flex-col gap-5 p-6 max-w-3xl mx-auto w-full">
             {[1, 2, 3].map((i) => (
                <ReviewSkeleton key={i} />
             ))}
@@ -100,71 +100,73 @@ const ReviewList = ({ productId }: ReviewListProps) => {
    const currentSummary = reviewData?.summary || summarizeResponse?.summary;
 
    return (
-<div className="bg-white border border-gray-200 shadow-md rounded-2xl p-6 max-w-3xl mx-auto">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-          <HiSparkles className="text-yellow-500" />
-          Review Summarizer
-        </h2>
-        <span className="text-sm text-gray-500">
-          {reviewData?.reviews.length} review
-          {reviewData?.reviews.length === 1 ? "" : "s"}
-        </span>
-      </div>
+      <div className="bg-white border border-gray-200 shadow-md rounded-2xl p-6 max-w-3xl mx-auto">
+         {/* Header */}
+         <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+               <HiSparkles className="text-yellow-500" />
+               Review Summarizer
+            </h2>
+            <span className="text-sm text-gray-500">
+               {reviewData?.reviews.length} review
+               {reviewData?.reviews.length === 1 ? '' : 's'}
+            </span>
+         </div>
 
-      {/* Summary Section */}
-      <div className="mb-6">
-        {currentSummary ? (
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 text-gray-800 p-4 rounded-lg leading-relaxed shadow-sm">
-            <p className="text-sm md:text-base whitespace-pre-line">
-              {currentSummary}
-            </p>
-          </div>
-        ) : (
-          <div className="text-center">
-            <Button
-              onClick={() => handleSummarize()}
-              disabled={isSummaryLoading}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg flex items-center gap-2 mx-auto transition-all duration-200 shadow-sm"
-            >
-              <HiSparkles className="text-yellow-300" />
-              Summarize Reviews
-            </Button>
+         {/* Summary Section */}
+         <div className="mb-6">
+            {currentSummary ? (
+               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 text-gray-800 p-4 rounded-lg leading-relaxed shadow-sm">
+                  <p className="text-sm md:text-base whitespace-pre-line">
+                     {currentSummary}
+                  </p>
+               </div>
+            ) : (
+               <div className="text-center">
+                  <Button
+                     onClick={() => handleSummarize()}
+                     disabled={isSummaryLoading}
+                     className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg flex items-center gap-2 mx-auto transition-all duration-200 shadow-sm"
+                  >
+                     <HiSparkles className="text-yellow-300" />
+                     Summarize Reviews
+                  </Button>
 
-            {isSummaryLoading && (
-              <div className="py-3">
-                <ReviewSkeleton />
-              </div>
+                  {isSummaryLoading && (
+                     <div className="py-3">
+                        <ReviewSkeleton />
+                     </div>
+                  )}
+
+                  {isSummaryError && (
+                     <p className="text-red-500 text-sm mt-2">
+                        Could not summarize the reviews. Try again!
+                     </p>
+                  )}
+               </div>
             )}
+         </div>
 
-            {isSummaryError && (
-              <p className="text-red-500 text-sm mt-2">
-                Could not summarize the reviews. Try again!
-              </p>
-            )}
-          </div>
-        )}
+         {/* Reviews Section */}
+         <div className="flex flex-col gap-6">
+            {reviewData?.reviews.map((review) => (
+               <div
+                  key={review.id}
+                  className="p-4 border border-gray-100 rounded-xl hover:shadow-md transition-all duration-200 bg-gray-50"
+               >
+                  <div className="flex items-center justify-between mb-2">
+                     <div className="font-semibold text-gray-800">
+                        {review.author}
+                     </div>
+                     <StarRating value={review.rating} />
+                  </div>
+                  <p className="text-gray-700 text-sm md:text-base leading-relaxed">
+                     {review.content}
+                  </p>
+               </div>
+            ))}
+         </div>
       </div>
-
-      {/* Reviews Section */}
-      <div className="flex flex-col gap-6">
-        {reviewData?.reviews.map((review) => (
-          <div
-            key={review.id}
-            className="p-4 border border-gray-100 rounded-xl hover:shadow-md transition-all duration-200 bg-gray-50"
-          >
-            <div className="flex items-center justify-between mb-2">
-              <div className="font-semibold text-gray-800">{review.author}</div>
-              <StarRating value={review.rating} />
-            </div>
-            <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-              {review.content}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
    );
 };
 
