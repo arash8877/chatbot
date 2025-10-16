@@ -5,15 +5,12 @@
 
 ## 🎟️ Ticket & Pricing Information
 
-| Ticket Type                | Price (USD) | Notes                                 |
+| Ticket Type                | Price (DKK) | Notes                                 |
 |---------------------------|-------------|---------------------------------------|
-| General Admission (12+)   | $129        | Includes all rides and attractions    |
-| Child Admission (3–11)    | $109        | Under 3 enters free                   |
-| Senior Admission (65+)    | $99         | Valid ID required                     |
-| Multi-Day Pass (3 Days)   | $299        | Park-hopping included                 |
-| FastLane Pass Add-on      | $59         | Skip the lines on select attractions  |
-| Annual Pass               | $899        | Includes parking & special discounts  |
-| Parking                   | $35/day     | Preferred parking: $50/day            |
+| Tivoli Pass.              | 449 DKK     | Unlimited access to Tivoli Garden     |
+| Child Entrance (3–7)      | 95 DKK      | Under 3 enters free                   |
+| Ride Pass                 | 189 DKK     | Include all rides                     |
+| Entrance and Ride Pass    | 359 DKK     | Try all rides as much as you want     |
 
 > 🎟️ All tickets include access to daytime shows, parades, and fireworks.
 
@@ -23,11 +20,10 @@
 
 | Area                   | Opening | Closing |
 |------------------------|---------|---------|
-| Main Park              | 9:00 AM | 10:00 PM|
-| Tivoli Hotel      | 24/7    |         |
-| Magic Dining Court     | 10:30 AM| 9:30 PM |
-| Wonder Waterpark       | 10:00 AM| 6:00 PM |
-| Night Spectacle Parade | 8:30 PM | 9:00 PM |
+| Regular season         | 11:00 AM| 10:00 PM|
+| Fridays & Saturdays    | 11:00 AM| 12:00 PM|
+| Summer special         | --      | 11:00 PM|
+| Halloween/Christmas    | 11:00 AM| 10:00 PM|
 
 > 🗓️ Hours may vary on holidays or special events. Ask the chatbot for today’s hours.
 
@@ -37,31 +33,31 @@
 
 ### For Young Kids (Ages 3–7)
 
-- **Pixie Meadow Carousel** – Gentle ride through fairyland animals  
-- **Bubbles & Giggles Lagoon** – Splash pad with playful animations  
-- **Treetop Tots Adventure** – Mini obstacle course for little ones  
-- **Snuggle Safari Train** – Jungle-themed scenic ride with animatronics  
+- **Fatamorgana** – Gentle ride through fairyland animals  
+- **The Astronomer** – Aim your telescope at the stars
+- **The Camel Trail** – The gentle thrills of The Camel Trail rollercoaster as you traverse its camel hump-shaped hills  
+- **The Classic Carousel** – It keeps turning, so you can try riding a different animal for each ride
 
 ### For All Ages (Families & Teens)
 
-- **Quest of the Crystal Guardians** – Indoor 4D interactive light-blaster ride  
-- **Dreamlight Express** – Scenic storytelling train ride  
-- **Wonder SkyRide** – Flying gondola with panoramic views  
-- **Legends on Ice** – Live skating show with magical themes  
+- **The Ferries Wheel** – Offers panoramic garden views since 1943
+- **The Flying Trunk** – It brings Hans Christian Andersen’s tales alive
+- **The Roller Coaster** – A classic wooden Roller Coaster
+- **The Swing Carousel** – Soar and swing through Tivoli’s dazzling, magical Swing Carousel 
 
 ### For Thrill Seekers (Ages 10+)
 
-- **Phantom Vale Coaster** – Haunted high-speed coaster  
-- **AetherStorm: Flight of Fury** – Suspended inverted coaster with loops  
-- **Doom Mine Plunge** – Water-coaster with backward drops  
-- **Galactic Warp Simulator** – VR space battle motion simulator  
+- **Aquila** – Spin and soar at 4G on Tivoli’s Aquila ride
+- **Fatamorgana - Wild Ride** – Feel thrilling spins and 2.5G forces on Tivoli’s ride
+- **The Demon** – Hurtle, twist, and loop through Tivoli’s adrenaline-pumping Demon coaster
+- **The Golden Tower** – Ascend, soar, and plummet on Tivoli’s thrilling Golden Tower
 
 ### For Adults or Slower-Paced Visitors
 
-- **Mystic Gardens Walkthrough** – Tranquil botanical trail  
-- **Royal Theater** – Broadway-style live musicals  
-- **Twilight River Cruise** – Serene evening boat ride  
-- **Vintage Time Machine** – Nostalgic ride through dreamy eras  
+- **The Star Flyer** – Soar 80 metres high, admiring Tivoli’s breathtaking Star Flyer views
+- **Villa Vendetta** – Face chills and thrills inside Tivoli’s haunted Vendetta mansion
+- **The Monsoon** – Whirl, spin, and soar through Tivoli’s thrilling Monsoon ride
+- **The Haunted House** – Venture carefully through Tivoli’s Haunted, where surprises lurk everywhere
 
 ---
 
@@ -69,17 +65,17 @@
 
 ### Tivoli Hotel (On-site Luxury)
 
-- **Standard Room:** $299/night (sleeps 4)  
-- **Suite:** $499/night (sleeps 6)  
+- **Standard Room:** DKK 565/night 
+- **Suite:** DKK 785/night 
 - **Features:**  
-  - Early park access (8 AM)  
+  - Early park access (9 AM)  
   - Free breakfast  
   - Character dining  
   - Free shuttle to park  
 
-### Magic Grove Inn (Budget, 5-min walk)
+### Mini Break
 
-- **Rooms from:** $139/night  
+- **Rooms from:** DKK 1580/night  
 - **Features:**  
   - Park shuttle every 20 mins  
   - Discounted park ticket bundles  
@@ -115,7 +111,7 @@
 
 ## 🧙‍♀️ Accessibility Services
 
-- Wheelchair & ECV rentals ($25–$50/day)  
+- Wheelchair & ECV rentals 
 - Hearing-assist devices for theaters  
 - Clearly marked ride accessibility info  
 - Sensory quiet zones  

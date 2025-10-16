@@ -15,6 +15,8 @@ type ReviewListProps = {
 
 //---------------------------- Main Function ----------------------------//
 const ReviewList = ({ productId }: ReviewListProps) => {
+
+   console.log('Product ID*****', productId)
    const {
       data: reviewData,
       isLoading,
@@ -99,6 +101,7 @@ const ReviewList = ({ productId }: ReviewListProps) => {
 
    const currentSummary = reviewData?.summary || summarizeResponse?.summary;
 
+   //---------------------------- JSX ----------------------------//
    return (
       <div className="bg-white border border-gray-200 shadow-md rounded-2xl p-6 max-w-3xl mx-auto">
          {/* Header */}
