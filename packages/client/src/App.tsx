@@ -1,4 +1,3 @@
-import Chatbot from './components/chat/Chatbot';
 import SummarizerPage from './pages/SummarizerPage';
 import { Navbar } from './components/ui/Navbar';
 import {
@@ -7,15 +6,16 @@ import {
    Route,
    Navigate,
 } from 'react-router-dom';
+import ChatPage from './pages/ChatPage';
 
 function App() {
    return (
       <Router>
          <Navbar />
-         <main className="py-4 h-[calc(100vh-7rem)] max-full">
+         <main className="h-[calc(100vh-7rem)] max-full">
             <Routes>
                <Route path="/" element={<Navigate to="/chatbot" />} />
-               <Route path="/chatbot" element={<Chatbot />} />
+               <Route path="/chatbot" element={<ChatPage />} />
                <Route
                   path="/summarizer"
                   element={<SummarizerPage />}
