@@ -32,7 +32,7 @@ export default function SummarizerPage() {
           <ReviewList productId={selectedProduct} />
         ) : (
           <p className="text-gray-500 text-center text-sm md:text-base">
-            Please select a product to view reviews and summary.
+            Please select a ride to view reviews and summary.
           </p>
         )}
       </div>

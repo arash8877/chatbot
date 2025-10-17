@@ -20,19 +20,19 @@ export function ProductSelector({ selectedProductId, onChange }: ProductSelector
     },
   });
 
-  if (isLoading) return <p>Loading products...</p>;
-  if (error) return <p className="text-red-500">Failed to load products</p>;
+  if (isLoading) return <p>Loading rides...</p>;
+  if (error) return <p className="text-red-500">Failed to load rides</p>;
 
   return (
     <div className="mb-6">
-      <label className="block mb-2 font-medium text-gray-700">Select a product:</label>
+      <label className="block mb-2 font-medium text-gray-700">Select a ride:</label>
       <select
         className="border border-gray-300 rounded-lg p-2 w-full md:w-64"
         value={selectedProductId ?? ''}
         onChange={(e) => onChange(Number(e.target.value))}
       >
         <option value="" disabled>
-          -- Choose a product --
+          -- Choose a ride --
         </option>
         {products?.map((p) => (
           <option key={p.id} value={p.id}>

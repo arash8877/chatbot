@@ -15,8 +15,6 @@ type ReviewListProps = {
 
 //---------------------------- Main Function ----------------------------//
 const ReviewList = ({ productId }: ReviewListProps) => {
-
-   console.log('Product ID*****', productId)
    const {
       data: reviewData,
       isLoading,
