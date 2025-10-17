@@ -84,10 +84,10 @@
 
 ## 🍽️ Dining Options
 
-- **Royal Banquet Hall** – Castle-themed fine dining w/ character visits  
-- **Galaxy Grub Hub** – Sci-fi quick service with plant-based options  
-- **Jungle Munch Café** – Family-friendly, classic favorites  
-- **Meadow Market** – Snacks, smoothies, coffee  
+- **Anarkist Bar** – Odense-based Anarkist Brewery
+- **Chicks by Chicks** – Well-prepared chicken is the focal point of flavorful dishes
+- **Crispy Greens** – Crunchy vegetables bursting with flavor and color
+- **Gasoline Grill** – American-inspired burgers with a twist
 
 > 🍱 Most locations accommodate allergies & dietary needs.
 
@@ -104,7 +104,7 @@
 ## 👶 Child Services
 
 - Baby Care Centers across all zones  
-- Stroller rentals ($20/day)  
+- Stroller rentals (DKK 100/day)  
 - Complimentary child locator wristbands  
 
 ---
