@@ -137,7 +137,7 @@ const ReviewList = ({ productId }: ReviewListProps) => {
                   </Button>
 
                   {isSummaryLoading && (
-                     <div className="py-3">
+                     <div className="py-3 text-left">
                         <ReviewSkeleton />
                      </div>
                   )}
