@@ -1,4 +1,5 @@
 import StarRating from './StarRating';
+import ReactMarkdown from 'react-markdown';
 import { HiSparkles } from 'react-icons/hi2';
 import ReviewSkeleton from './ReviewSkeleton';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -118,9 +119,11 @@ const ReviewList = ({ productId }: ReviewListProps) => {
          <div className="mb-6">
             {currentSummary ? (
                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 text-gray-800 p-4 rounded-lg leading-relaxed shadow-sm">
-                  <p className="text-sm md:text-base whitespace-pre-line">
-                     {currentSummary}
-                  </p>
+                  <div className="text-sm md:text-base whitespace-pre-line prose prose-sm text-gray-800">
+                     <ReactMarkdown>
+                        {currentSummary}
+                     </ReactMarkdown>
+                  </div>
                </div>
             ) : (
                <div className="text-center">
