@@ -4,7 +4,7 @@
    "type": "module",
    "private": true,
    "scripts": {
-      "start": "bun run index.ts",
+      "start": "bun index.ts",
       "dev": "bun run --watch index.ts",
       "seed": "bun run prisma/seed.ts"
    },
@@ -27,3 +27,4 @@
       "zod": "^4.1.12"
    }
 }
+
