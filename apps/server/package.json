@@ -6,6 +6,7 @@
    "scripts": {
       "start": "bun index.ts",
       "dev": "bun run --watch index.ts",
+      "build": "prisma generate",
       "seed": "bun run prisma/seed.ts"
    },
    "devDependencies": {
@@ -27,4 +28,3 @@
       "zod": "^4.1.12"
    }
 }
-
