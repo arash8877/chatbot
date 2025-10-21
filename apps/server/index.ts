@@ -23,7 +23,7 @@ app.use(cors({
 
 
 
-app.use(router);
+app.use('/api', router);
 
 //Set the port 
 const port = process.env.PORT || 3000;

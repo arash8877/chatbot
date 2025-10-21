@@ -12,20 +12,20 @@ router.get('/', (req: Request, res: Response) => {
 });
 
 // Example API route
-router.get('/api/hello', (req: Request, res: Response) => {
+router.get('/hello', (req: Request, res: Response) => {
    res.json({ message: 'Hello from the API!' });
 });
 
 // Chat endpoint
-router.post('/api/chat', chatController.sendMessage);
+router.post('/chat', chatController.sendMessage);
 
 // Get reviews for a specific product
-router.get('/api/products/:id/reviews', reviewController.getReviews);
+router.get('/products/:id/reviews', reviewController.getReviews);
 
 // Make summary of reviews for a specific product
-router.post('/api/products/:id/reviews/summarize', reviewController.summarizeReviews);
+router.post('/products/:id/reviews/summarize', reviewController.summarizeReviews);
 
 // Get list of products
-router.get('/api/products', productController.getProducts);
+router.get('/products', productController.getProducts);
 
 export default router;
