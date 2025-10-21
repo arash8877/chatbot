@@ -14,6 +14,21 @@ const port = process.env.PORT || 3000;
 
 
 
+
+
+import cors from "cors";
+
+app.use(cors({
+  origin: [
+    "https://tivolibot-client.vercel.app",
+    "http://localhost:5173"
+  ],
+  credentials: true,
+}));
+
+
+
+
 //Start the server 
 // if (process.env.NODE_ENV !== 'production') {
 //   app.listen(port, () => {
