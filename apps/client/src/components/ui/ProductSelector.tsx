@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { api } from '@/lib/api';
 
 type Product = {
   id: number;
@@ -16,7 +16,7 @@ export function ProductSelector({ selectedProductId, onChange }: ProductSelector
   const { data: products, isLoading, error } = useQuery<Product[]>({
     queryKey: ['products'],
     queryFn: async () => {
-      const { data } = await axios.get<Product[]>('/api/products');
+      const { data } = await api.get<Product[]>('/api/products');
       return data;
     },
   });

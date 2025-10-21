@@ -17,13 +17,15 @@ export type SummarizeResponseProps = {
    summary: string;
 };
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_API_BASE_URL;
 
 //---------------------------- API Calls ----------------------------//
 export const reviewsApi = {
    fetchReviews(productId: number) {
       return axios
-         .get<GetReviewsResponseProps>(`${SERVER_URL}/api/products/${productId}/reviews`)
+         .get<GetReviewsResponseProps>(
+            `${SERVER_URL}/api/products/${productId}/reviews`
+         )
          .then((res) => res.data);
    },
 
