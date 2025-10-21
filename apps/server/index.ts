@@ -7,12 +7,6 @@ dotenv.config();
 
 export const app = express();
 app.use(express.json());
-app.use(router);
-
-//Set the port 
-const port = process.env.PORT || 3000;
-
-
 
 
 
@@ -25,6 +19,20 @@ app.use(cors({
   ],
   credentials: true,
 }));
+
+
+
+
+app.use(router);
+
+//Set the port 
+const port = process.env.PORT || 3000;
+
+
+
+
+
+
 
 
 

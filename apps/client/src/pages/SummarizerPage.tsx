@@ -7,7 +7,6 @@ import pattern from '@/assets/pattern.jpg';
 export default function SummarizerPage() {
    const [selectedProduct, setSelectedProduct] = useState<number | null>(null);
 
-   console.log('selectedProduct:', selectedProduct);
 
    //---------------------------- JSX ----------------------------//
    return (

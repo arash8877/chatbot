@@ -7,7 +7,7 @@ export const productController = {
       const products = await productRepository.getProducts();
       res.json(products);
     } catch (err) {
-      console.error(err);
+      console.error('❌ Prisma error:', err);
       res.status(500).json({ error: 'Failed to fetch products' });
     }
   },

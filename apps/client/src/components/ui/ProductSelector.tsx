@@ -11,6 +11,7 @@ type ProductSelectorProps = {
   onChange: (productId: number) => void;
 };
 
+//---------------------------- ProductSelector Component ----------------------------//
 export function ProductSelector({ selectedProductId, onChange }: ProductSelectorProps) {
   const { data: products, isLoading, error } = useQuery<Product[]>({
     queryKey: ['products'],

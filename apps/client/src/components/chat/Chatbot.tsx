@@ -16,6 +16,7 @@ type ChatResponse = {
   message: string[];
 };
 
+//---------------------------- Chatbot Component ----------------------------//
 const Chatbot = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isBotTyping, setIsBotTyping] = useState(false);
